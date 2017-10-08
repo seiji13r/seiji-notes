@@ -14,5 +14,4 @@ Updates: Install Security Updates Automatically\
 Packages: \
 	Standard System Utilities\
 	OpenSSH Server\
-Install GRUB: Yes\
-
+Install GRUB: Yes
