@@ -23,14 +23,14 @@ Check Disk Usage \
 Update Rerpository Pointers \
 Upgrade Packages \
 Auto Remove Old Kernel Files in \Boot Partition
-Check Disk Usage \
+Check Disk Usage
 
-COMMAND LIST
+**COMMANDS** \
 df -H \
-sudo apt-get udpate
-sudo apt-get upgrade
-df - H
-sudo apt-get autoremove
+sudo apt-get udpate \
+sudo apt-get upgrade \
+df - H \
+sudo apt-get autoremove \
 df -H
 
 ########################################################################### \
@@ -41,17 +41,17 @@ Install Guest Additions \
 In VirtualBox (Virtual Machine) Settings go to: \
 Network \
 Port Forwarding \
-Configure Name(SSH) Host(Blank) Port(22) Host(Blank) Port(22) \
+Configure Name(SSH) Host(Blank) Port(22) Host(Blank) Port(22)
 
 **INSTALL GUEST ADDITIONS** \
 Insert Guest Aditions. In VM Menu -> Devices -> Insert Guest Additions \
 In the terminal Install Linux Headers and Build Essentials. \
 Mount the CD-ROM \
-Install \
+Install the Guest Additions
 
 **COMMANDS** \
-sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
-sudo mount -t auto /dev/cdrom /media/cdrom/
+sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r) \
+sudo mount -t auto /dev/cdrom /media/cdrom/ \
 sudo sh ./VBoxLinuxAdditions.run
 
 ########################################################################### \
@@ -59,20 +59,20 @@ sudo sh ./VBoxLinuxAdditions.run
 Create a new user \
 Add the user to the sudoer group \
 Modify User data if required \
-List the Users registered in the system \
+List the Users registered in the system
 
 **COMMANDS** \
 sudo adduser [USERNAME] \
 sudo usermod -aG sudo [USERNAME] \
 chfn [options] [USERNAME] \
 chfn [USERNAME] \
-cat /etc/passwd \
+cat /etc/passwd
 
 **List Sudoer Users**
-grep -Po '^sudo.+:\K.*$' /etc/group \
+grep -Po '^sudo.+:\K.*$' /etc/group
 
 ########################################################################### \
-**Share a directory for the projects with the HOST Machine* \
+**Share a directory for the projects with the HOST Machine** \
 Create a directory in the HOst Machine \
 Go to Settings in the Virtual Machine Menu \
 Select the Created Directory to be shared \
@@ -82,20 +82,20 @@ Reboot the Virtual Machine (Guest Marchine)
 Verify the shared directory is being automounted and displayed \
 In a Terminal Window (Guest Machine) create the shared direcotry \
 In the Guest Machine edit the user .profile to mount the \
-Shared Directory in the specified location \
+Shared Directory in the specified location
 
-**COMMANDS**
+**COMMANDS** \
 df -H \
 mkdir shared \
 sudo mount -t vboxsf [HOST_DIRECTORY] /home/[USERNAME]/[SHARED] \
-sudo mount -t vboxsf VMTraining /home/training/shared \
+sudo mount -t vboxsf VMTraining /home/training/shared
 
 vim .profile \
 sudo mount -t vboxsf [HOST_DIRECTORY] /home/[USERNAME]/[SHARED] \
-:wq \
+:wq
 
 source .profile \
-cd shared \
+cd shared
 
 
 
