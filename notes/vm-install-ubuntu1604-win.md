@@ -35,6 +35,7 @@ df -H
 
 ########################################################################### \
 Configure SSH Port Forwarding to log with terminal window and \
+Guest Aditions
 
 **CONFIGURE PORT FORWARDING** \
 Install Guest Additions \
@@ -68,7 +69,7 @@ chfn [options] [USERNAME] \
 chfn [USERNAME] \
 cat /etc/passwd
 
-**List Sudoer Users**
+**List Sudoer Users**\
 grep -Po '^sudo.+:\K.*$' /etc/group
 
 ########################################################################### \
