@@ -52,7 +52,9 @@ Install the Guest Additions
 
 **COMMANDS** \
 sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r) \
+sudo reboot \
 sudo mount -t auto /dev/cdrom /media/cdrom/ \
+cd /media/cdrom/
 sudo sh ./VBoxLinuxAdditions.run
 
 ########################################################################### \
