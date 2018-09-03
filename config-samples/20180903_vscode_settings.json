@@ -1,0 +1,11 @@
+{
+    "files.autoSave": "onFocusChange",
+    "window.zoomLevel": 0,
+    "editor.renderWhitespace": "all",
+
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "explorer.confirmDelete": false,
+    "python.venvPath": "~/.virtualenvs"
+}
