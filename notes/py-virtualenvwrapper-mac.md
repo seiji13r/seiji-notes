@@ -1,33 +1,49 @@
-Installing and Configuring VirtualenvWrapper in Mac
+# Installing and Configuring VirtualenvWrapper in Mac
 
-Install Python3 from https://www.python.org/downloads/
-Upgrade pip3
+## Install Python3 from https://www.python.org/downloads/
+* Upgrade pip3
+```
 pip3 install --upgrade pip
+```
 
-Install VirtualEnvWrapper
+* Install VirtualEnvWrapper
+```
 pip install virtualenvwrapper
+```
 
-Locate the virtualenvwrapper.sh location
+* Locate the virtualenvwrapper.sh location
+```
 sudo find / -name virtualenvwrapper.sh
 
 /Library/Frameworks/Python.framework/Versions/3.7/bin/virtualenvwrapper.sh
+```
+* Open and Edit the virtualenvwrapper.sh Script:
+* Locate the line 50 (with VIM type [:set number] to display the line numbers)
 
-Open and Edit the virtualenvwrapper.sh
-Locate the line 50 (with VIM type [:set number] to display the line numbers)
-Change the line from:
+    Change the line from:
+
+    ```bash
     VIRTUALENVWRAPPER_PYTHON="$(command \which python)"
-to:
+    ```
+    to:
+
+    ```bash
     VIRTUALENVWRAPPER_PYTHON="$(command \which python3)"
+    ```
 
-So virtualenvwrapper use Python3 to create the virtual environments.
+    So virtualenvwrapper use Python3 to create the virtual environments.
 
-Edit the user's .bash_profile 
-cd ~
-vim .bash_profile 
+* Edit the user's .bash_profile 
+    ```bash
+    cd ~
+    vim .bash_profile 
+    ```
 
-Add the following lines:
-[Make sure to use the complete path of the virtualenvwrapper.sh you found]
+* Add the following lines:
 
+[Make sure to use the complete path of the virtualenvwrapper.sh script you found]
+
+```bash
 # VIRTUALENVWRAPPER CONFIGURATION
 # set where virutal environments will live
 export WORKON_HOME=$HOME/.virtualenvs
@@ -42,6 +58,6 @@ if [[ -r /Library/Frameworks/Python.framework/Versions/3.7/bin/virtualenvwrapper
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
+```
 
-
-http://mkelsey.com/2013/04/30/how-i-setup-virtualenv-and-virtualenvwrapper-on-my-mac/
+[Reference Link](http://mkelsey.com/2013/04/30/how-i-setup-virtualenv-and-virtualenvwrapper-on-my-mac/ "Reference")
