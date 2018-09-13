@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Random Number Generator</title>
+  <style>
+    .container {
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid red;
+      border-radius: 10px;
+      width: 20%;
+      text-align: center;
+    }
+
+    #number-box {
+      padding: 20px;
+      margin: 20px;
+      font-size: 28px;
+      border: 1px solid blue;
+      border-radius: 10px;
+    }
+
+    #button{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="number-box">
+      #
+    </div>
+    <button id="button">Click Here to Generate Number</button>
+  </div>
+  <script type="text/javascript" src="randomFunctionMinMaxNum.js"></script>
+  <script>
+    var button = document.getElementById("button");
+    var numberBox = document.getElementById("number-box");
+    var minNumber = -10;
+    var maxNumber = 10;
+    button.onclick = function(){
+      numberBox.textContent = randomNumber(minNumber, maxNumber);
+    };
+  </script>
+</body>
+</html>
