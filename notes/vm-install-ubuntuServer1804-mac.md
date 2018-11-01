@@ -83,7 +83,9 @@ sudo poweroff
 
 ### SSH Configuration
 #### Bridged Configuration
+
 * Configure VM Network to Bridged
+![VM Network Config](vm-install-ubuntuServer1804-mac/VM-Bridged.png)
 * Restart
   
 In Ubutnu Console type `ifconfig` , Verify the new IP Address is in your Network Segment.
@@ -93,6 +95,7 @@ In macOS Terminal ssh to the Virtual Machine
 ssh -p 22 ubuntu@192.168.1.79
 ```
 #### Port Forwarding Configuration
+
 
 ### Virtual Box Guest Additions
 > Menu -> Devices -> Insert Guess Additions CD Image
