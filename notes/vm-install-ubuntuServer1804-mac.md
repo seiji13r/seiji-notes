@@ -1,6 +1,8 @@
-#TOC
+# Ubuntu Server Installation NOTES
+
 <!-- TOC -->
 
+- [Ubuntu Server Installation NOTES](#ubuntu-server-installation-notes)
 - [VirtualBox Installation](#virtualbox-installation)
 - [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)
     - [VM Configuration](#vm-configuration)
@@ -17,6 +19,18 @@
         - [Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`](#edit-etcmysqlmysqlconfdmysqldcnf)
         - [Create A Remote User](#create-a-remote-user)
         - [Restart MySQL Service](#restart-mysql-service)
+    - [PostgreSQL](#postgresql)
+    - [NGINX](#nginx)
+    - [Python 3](#python-3)
+    - [(Python) Virtualenv](#python-virtualenv)
+    - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
+    - [Supervisor](#supervisor)
+    - [NodeJS](#nodejs)
+    - [GIT](#git)
+    - [Network Clock Sync](#network-clock-sync)
+- [Linux Command Reference](#linux-command-reference)
+    - [Service Status](#service-status)
+    - [List Listening Ports](#list-listening-ports)
 
 <!-- /TOC -->
   
@@ -151,3 +165,58 @@ sudo service mysql status
 sudo service mysql restart
 ```
 
+## PostgreSQL
+
+## NGINX
+
+
+## Python 3
+Python3 is already Installed in Ubuntu 18.04 but [pip3](https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/) is not.
+
+Verify the Repositories are enabled
+```
+sudo add-apt-repository main
+sudo add-apt-repository universe
+sudo add-apt-repository restricted
+sudo add-apt-repository multiverse
+```
+Install it
+```console
+sudo apt-get install python3
+sudo apt install python3-pip
+pip3 install --upgrade pip
+```
+
+[Issue Solved](https://askubuntu.com/questions/378558/unable-to-locate-package-while-trying-to-install-packages-with-apt)
+
+## (Python) Virtualenv
+## (Python) Virtualenvwrapper
+## Supervisor
+
+## NodeJS
+
+Check for the latest LTS Version and Update the commands shown below.
+
+[Reference Article](https://websiteforstudents.com/install-the-latest-node-js-and-nmp-packages-on-ubuntu-16-04-18-04-lts/)
+
+[Node Source](https://github.com/nodesource/distributions/blob/master/README.md#debinstall)
+
+```bash
+
+# Using Ubuntu
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+[NodeJS in Production with NGINX](https://www.moveoapps.com/blog/set-node-js-application-production-nginx-reverse-proxy/)
+
+## GIT
+GIT is already Installed in Ubuntu 18.04
+``` console
+sudo apt-get install git
+```
+## Network Clock Sync
+
+# Linux Command Reference
+## Service Status
+## List Listening Ports
