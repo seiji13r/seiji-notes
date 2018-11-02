@@ -11,8 +11,10 @@
         - [System Upgrade](#system-upgrade)
         - [SSH Configuration](#ssh-configuration)
             - [Bridged Configuration](#bridged-configuration)
+                - [IP Config with NETPLAN](#ip-config-with-netplan)
             - [Port Forwarding Configuration](#port-forwarding-configuration)
         - [Virtual Box Guest Additions](#virtual-box-guest-additions)
+    - [Share Folder](#share-folder)
 - [Ubuntu 18.04 Software Installation](#ubuntu-1804-software-installation)
     - [List Installed Packaged](#list-installed-packaged)
     - [MySQL](#mysql)
@@ -91,8 +93,40 @@ sudo poweroff
 In Ubutnu Console type `ifconfig` , Verify the new IP Address is in your Network Segment.
 
 In macOS Terminal ssh to the Virtual Machine
-```
+```console
 ssh -p 22 ubuntu@192.168.1.79
+```
+##### IP Config with NETPLAN
+[Reference](https://websiteforstudents.com/configure-static-ip-addresses-on-ubuntu-18-04-beta/)
+
+```bash
+# /etc/netplan/50-cloud-init.yaml
+sudo vim /etc/netplan/50-cloud-init.yaml
+
+# DHCP ORIGINAL CONFIG
+network:
+    ethernets:
+        enp0s3:
+            addresses: []
+            dhcp4: true
+    version: 2
+
+# STATIC IP CONFIGURATION
+network:
+    ethernets:
+        enp0s3:
+            addresses: [192.168.1.240/24]
+            gateway4: 192.168.1.254
+            nameservers:
+              addresses: [192.168.1.254,200.94.26.115,8.8.8.8,8.8.4.4]
+            dhcp4: no
+    version: 2
+
+```
+
+```console
+sudo netplan apply
+sudo netplan --debug apply
 ```
 #### Port Forwarding Configuration
 
@@ -113,6 +147,50 @@ cd /media/cdrom/
 sudo sh ./VBoxLinuxAdditions.run
 ```
 > Guest Additions are required if you want to share a Disk between the Host machine and the Guest machine.
+
+## Share Folder
+* Create a directory in the Host Machine
+* Go to Settings in the Virtual Machine Menu
+* Select the Created Directory to be shared
+* Select: Automount and Unselect: Read only \
+* Reboot the Virtual Machine (Guest Marchine)
+
+* Verify the shared directory is being automounted and displayed
+* In a Terminal Window (Guest Machine) create the shared direcotry
+* In the Guest Machine edit the user .profile to mount the Shared Directory in the specified location
+
+
+```bash
+# Old Method
+
+df -H
+mkdir shared
+sudo mount -t vboxsf [HOST_DIRECTORY] /home/[USERNAME]/[SHARED]
+sudo mount -t vboxsf VMTraining /home/training/shared
+
+vim .profile \
+sudo mount -t vboxsf [HOST_DIRECTORY] /home/[USERNAME]/[SHARED]
+:wq
+
+source .profile \
+cd shared
+```
+
+```bash
+# New Method
+# List the Directories
+df -H
+# Try to Cd into the Virtua Box Shared Directory
+cd /media/vm-shared
+# sudo usermod -a -G vboxsf <user>
+sudo usermod -a -G vboxsf ubuntu
+# Reboot the VM and try Again
+# Try to Cd into the Virtua Box Shared Directory
+cd /media/sf_vm-shared/
+# Create a soft Link
+# ln -s [Source] [Link]
+ln -s /media/sf_vm-shared/ myshared
+```
 
 # Ubuntu 18.04 Software Installation
 ## List Installed Packaged
