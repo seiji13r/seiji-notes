@@ -3,10 +3,14 @@
 <!-- TOC -->
 
 - [BASH Programming Language Notes](#bash-programming-language-notes)
+- [Cheat Sheets](#cheat-sheets)
 - [Top Line Script](#top-line-script)
 - [Existence of Files](#existence-of-files)
 
 <!-- /TOC -->
+
+# Cheat Sheets
+[Bash Cheat Sheet](https://devhints.io/bash)
 
 # Top Line Script
 ```bash
