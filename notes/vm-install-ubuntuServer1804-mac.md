@@ -1,8 +1,8 @@
-# Ubuntu Server Installation NOTES
+# Ubuntu Server 18.04 Installation NOTES
 
 <!-- TOC -->
 
-- [Ubuntu Server Installation NOTES](#ubuntu-server-installation-notes)
+- [Ubuntu Server 18.04 Installation NOTES](#ubuntu-server-1804-installation-notes)
 - [Download the Required Software.](#download-the-required-software)
 - [VirtualBox Installation](#virtualbox-installation)
 - [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)
@@ -43,8 +43,8 @@
 <!-- /TOC -->
   
 # Download the Required Software.
-[VirutalBox]()
-[Ubuntu Server 18.04]()
+[VirutalBox](https://www.virtualbox.org/wiki/Downloads)
+[Ubuntu Server 18.04](https://www.ubuntu.com/download/server)
 
 # VirtualBox Installation
 
