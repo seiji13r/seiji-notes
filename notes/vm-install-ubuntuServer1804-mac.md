@@ -39,6 +39,8 @@
     - [Service Status](#service-status)
     - [List Listening Ports](#list-listening-ports)
     - [List Users](#list-users)
+        - [Memory Usage](#memory-usage)
+        - [MAC Address](#mac-address)
 
 <!-- /TOC -->
   
@@ -415,3 +417,23 @@ sudo netstat -plnt | grep ':80'
 ```bash
 sudo cat /etc/passwd
 ```
+
+### Memory Usage
+[Reference](https://www.binarytides.com/linux-command-check-memory-usage/)
+```bash
+free -m
+
+cat /proc/meminfo
+
+vmstat -s
+```
+
+### MAC Address
+```bash
+# cat /sys/class/net/[interface]]/address
+cat /sys/class/net/enp0s3/address
+
+ifconfig -a | grep -Po 'HWaddr \K.*$'
+```
+
+[Reference](https://askubuntu.com/questions/628383/output-only-mac-address-on-ubuntu)
