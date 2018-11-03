@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Ubuntu Server Installation NOTES](#ubuntu-server-installation-notes)
+- [Download the Required Software.](#download-the-required-software)
 - [VirtualBox Installation](#virtualbox-installation)
 - [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)
     - [VM Configuration](#vm-configuration)
@@ -22,10 +23,14 @@
         - [Create A Remote User](#create-a-remote-user)
         - [Restart MySQL Service](#restart-mysql-service)
     - [PostgreSQL](#postgresql)
+        - [Installation](#installation)
+        - [Configuration](#configuration)
     - [NGINX](#nginx)
+        - [Installation](#installation-1)
     - [Python 3](#python-3)
     - [(Python) Virtualenv](#python-virtualenv)
     - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
+        - [Configuration](#configuration-1)
     - [Supervisor](#supervisor)
     - [NodeJS](#nodejs)
     - [GIT](#git)
@@ -33,9 +38,13 @@
 - [Linux Command Reference](#linux-command-reference)
     - [Service Status](#service-status)
     - [List Listening Ports](#list-listening-ports)
+    - [List Users](#list-users)
 
 <!-- /TOC -->
   
+# Download the Required Software.
+[VirutalBox]()
+[Ubuntu Server 18.04]()
 
 # VirtualBox Installation
 
@@ -84,6 +93,7 @@ sudo poweroff
 ```
 
 ### SSH Configuration
+
 #### Bridged Configuration
 
 * Configure VM Network to Bridged
@@ -248,14 +258,22 @@ sudo service mysql restart
 
 ## PostgreSQL
 
-## NGINX
+[Reference](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04)
+### Installation
+```console
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+```
+### Configuration
 
+## NGINX
+### Installation
 
 ## Python 3
 Python3 is already Installed in Ubuntu 18.04 but [pip3](https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/) is not.
 
 Verify the Repositories are enabled
-```
+```console
 sudo add-apt-repository main
 sudo add-apt-repository universe
 sudo add-apt-repository restricted
@@ -271,7 +289,48 @@ pip3 install --upgrade pip
 [Issue Solved](https://askubuntu.com/questions/378558/unable-to-locate-package-while-trying-to-install-packages-with-apt)
 
 ## (Python) Virtualenv
+```console
+pip3 install --upgrade pip
+pip3 install --user virtualenv
+```
 ## (Python) Virtualenvwrapper
+```console
+pip3 install --upgrade pip
+pip3 install --user virtualenvwrapper
+```
+### Configuration
+* Locate the virtualenvwrapper path.  `sudo find / -name virtualenvwrapper.sh`
+* Edit the `virtualenvwrapper.sh` script.
+```bash
+# vim virtualenvwrapper.sh
+# set number
+#
+# Change the script line 
+# from
+50     VIRTUALENVWRAPPER_PYTHON="$(command \which python)"
+# to
+50     VIRTUALENVWRAPPER_PYTHON="$(command \which python3)"
+```
+* Edit `~/.profile`
+```bash
+# VIRTUALENVWRAPPER CONFIGURATION
+# Update with the location of the virtualenvwrapper.sh Path.
+VIRTUALENVWRAPPER_SH_PATH=""
+# set where virutal environments will live
+export WORKON_HOME=$HOME/.virtualenvs
+# ensure all new environments are isolated from the site-packages directory
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+# use the same directory for virtualenvs as virtualenvwrapper
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# makes pip detect an active virtualenv and install to it
+export PIP_RESPECT_VIRTUALENV=true
+if [[ -r ${VIRTUALENVWRAPPER_SH_PATH} ]]; then
+    source ${VIRTUALENVWRAPPER_SH_PATH}
+else
+    echo "WARNING: Can't find virtualenvwrapper.sh"
+fi
+```
+
 ## Supervisor
 
 ## NodeJS
@@ -296,8 +355,63 @@ GIT is already Installed in Ubuntu 18.04
 ``` console
 sudo apt-get install git
 ```
+ Add the following lines to `~/.profile` This way you can view the branch in the prompt.
+```bash
+# Git branch in prompt.
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+
+```
+
 ## Network Clock Sync
+
+[Reference Digital Ocean Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-time-synchronization-on-ubuntu-16-04)
+[Reference Ubuntu Docs](https://help.ubuntu.com/lts/serverguide/NTP.html.en)
+
+```bash
+# Check if Date/Time is correct
+date
+# Check System time status
+timedatectl status
+# Check time-zones
+timedatectl list-timezones
+timedatectl list-timezones | grep Mexico
+# Set the Time Zone
+sudo timedatectl set-timezone America/Mexico_City
+# rolling back to UTC or Etc/UTC in the Time Zone
+# sudo timedatectl set-timezone Etc/UTC
+# Check System time status
+timedatectl status
+# Check if Date/Time is now correct
+date
+
+```
 
 # Linux Command Reference
 ## Service Status
+```bash
+# Service Status Check
+sudo service [srv_name] status
+# Service Stop
+sudo service [srv_name] stop
+# Service Start
+sudo service [srv_name] start
+# Service Restart
+sudo service restart
+```
 ## List Listening Ports
+
+[Reference](https://support.rackspace.com/how-to/checking-listening-ports-with-netstat/)
+
+```console
+sudo netstat -plnt
+
+sudo netstat -plnt | grep ':80'
+```
+
+## List Users
+```bash
+sudo cat /etc/passwd
+```
