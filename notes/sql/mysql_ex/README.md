@@ -7,6 +7,9 @@
     - [Run SQL in command line](#run-sql-in-command-line)
 - [Solved Exercises](#solved-exercises)
     - [Basics](#basics)
+        - [Show Databases](#show-databases)
+        - [Create if Exist a Database and Use it.](#create-if-exist-a-database-and-use-it)
+        - [Create a table inside the database with 2 fields (id and name), id should be.](#create-a-table-inside-the-database-with-2-fields-id-and-name-id-should-be)
     - [INSERT](#insert)
     - [UPDATE](#update)
     - [DELETE](#delete)
@@ -33,8 +36,14 @@ myslq -u root -p < [sql file]
 
 # Solved Exercises
 ## Basics
-1. Create if Exist a Database and Use it.
-2. Create a table inside the database with 2 fields (id and name), id should be.
+### Show Databases
+```sql
+SHOW SCHEMAS;
+SHOW DATABASES;
+```
+### Create if Exist a Database and Use it.
+### Create a table inside the database with 2 fields (id and name), id should be.
+3. 
 ## INSERT
 ## UPDATE
 ## DELETE
