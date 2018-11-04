@@ -408,6 +408,8 @@ sudo service restart
 [Reference](https://support.rackspace.com/how-to/checking-listening-ports-with-netstat/)
 
 ```console
+sudo netstat -tulpn
+
 sudo netstat -plnt
 
 sudo netstat -plnt | grep ':80'
