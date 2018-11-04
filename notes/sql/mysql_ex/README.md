@@ -45,4 +45,4 @@ myslq -u root -p < [sql file]
 
 
 # W3RESOURCE
-[SQL-EXERCISES](https://www.w3resource.com/sql-exercises/)
+[SQL-EXERCISES (Postgresql Exercises)](https://www.w3resource.com/sql-exercises/)
