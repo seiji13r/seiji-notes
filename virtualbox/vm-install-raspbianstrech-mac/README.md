@@ -1,5 +1,17 @@
 # Install Raspbian Stretch Desktop in VirtualBox
+<!-- TOC -->
 
+- [Install Raspbian Stretch Desktop in VirtualBox](#install-raspbian-stretch-desktop-in-virtualbox)
+- [ISO Download](#iso-download)
+- [Create a New Virtual Machine in VirtualBox](#create-a-new-virtual-machine-in-virtualbox)
+    - [Process with images.](#process-with-images)
+- [Install Raspbian Stretch](#install-raspbian-stretch)
+- [Configure It](#configure-it)
+    - [Graphical Desktop](#graphical-desktop)
+    - [Command Line](#command-line)
+- [Download VNC Viewer](#download-vnc-viewer)
+
+<!-- /TOC -->
 # ISO Download
 
 [Download Page](https://www.raspberrypi.org/downloads/raspberry-pi-desktop/)
@@ -62,7 +74,7 @@ Once the system is rebooted.
    ![Click on Configuration](assets/img/100_configuration.png)
 3. Configure the System Settings
    ![System Settings](assets/img/101_configuration.png)
-4. Enable SSH
+4. Enable SSH.
    ![SSH](assets/img/102_configuration.png)
 5. Configure Localization.
    ![Localization](assets/img/103_configuration.png)
