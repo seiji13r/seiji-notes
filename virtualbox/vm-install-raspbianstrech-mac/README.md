@@ -35,9 +35,9 @@
 # Install Raspbian Stretch
 
 1. In the initial Boot, Select Install.
-![Install](assets/img/050_Install.png)
+   ![Install](assets/img/050_Install.png)
 2. Select the Keyboard Layout. (For Mac in Mexico Select Spanish Layout)
-![Keyboard Layout Selection](assets/img/051_Keyboard.png)
+   ![Keyboard Layout Selection](assets/img/051_Keyboard.png)
 3. Follow the defaults for partitioning.
    ![Partition1](assets/img/052_Partition.png)
    ![Partition2](assets/img/053_Partition.png)
