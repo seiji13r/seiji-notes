@@ -32,6 +32,7 @@
     - [NodeJS](#nodejs)
     - [GIT](#git)
     - [Network Clock Sync](#network-clock-sync)
+- [Running the VM in the backplane](#running-the-vm-in-the-backplane)
 - [Linux Command Reference](#linux-command-reference)
     - [Service Status](#service-status)
     - [List Listening Ports](#list-listening-ports)
@@ -384,6 +385,13 @@ timedatectl status
 # Check if Date/Time is now correct
 date
 
+```
+
+# Running the VM in the backplane
+```bash
+#!/bin/bash
+# VBoxHeadless --startvm "vm_name" &
+VBoxHeadless --startvm "UbuntuServer1804" &
 ```
 
 # Linux Command Reference
