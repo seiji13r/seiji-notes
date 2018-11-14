@@ -40,8 +40,8 @@
         - [MAC Address](#mac-address)
 
 # Download the Required Software.
-[VirutalBox](https://www.virtualbox.org/wiki/Downloads)
-[Ubuntu Server 18.04](https://www.ubuntu.com/download/server)
+* [VirutalBox](https://www.virtualbox.org/wiki/Downloads)
+* [Ubuntu Server 18.04](https://www.ubuntu.com/download/server)
 
 # VirtualBox Installation
 
