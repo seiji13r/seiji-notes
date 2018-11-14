@@ -1,48 +1,6 @@
 # Ubuntu Server 18.04 Installation NOTES
 
-<!-- TOC -->
-
-- [Ubuntu Server 18.04 Installation NOTES](#ubuntu-server-1804-installation-notes)
-- [Download the Required Software.](#download-the-required-software)
-- [VirtualBox Installation](#virtualbox-installation)
-- [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)
-    - [VM Configuration](#vm-configuration)
-    - [Ubuntu Installation](#ubuntu-installation)
-    - [Ubuntu Customization](#ubuntu-customization)
-        - [System Upgrade](#system-upgrade)
-        - [SSH Configuration](#ssh-configuration)
-            - [Bridged Configuration](#bridged-configuration)
-                - [IP Config with NETPLAN](#ip-config-with-netplan)
-            - [Port Forwarding Configuration](#port-forwarding-configuration)
-        - [Virtual Box Guest Additions](#virtual-box-guest-additions)
-    - [Share Folder](#share-folder)
-- [Ubuntu 18.04 Software Installation](#ubuntu-1804-software-installation)
-    - [List Installed Packaged](#list-installed-packaged)
-    - [MySQL](#mysql)
-        - [Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`](#edit-etcmysqlmysqlconfdmysqldcnf)
-        - [Create A Remote User](#create-a-remote-user)
-        - [Restart MySQL Service](#restart-mysql-service)
-    - [PostgreSQL](#postgresql)
-        - [Installation](#installation)
-        - [Configuration](#configuration)
-    - [NGINX](#nginx)
-        - [Installation](#installation-1)
-    - [Python 3](#python-3)
-    - [(Python) Virtualenv](#python-virtualenv)
-    - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
-        - [Configuration](#configuration-1)
-    - [Supervisor](#supervisor)
-    - [NodeJS](#nodejs)
-    - [GIT](#git)
-    - [Network Clock Sync](#network-clock-sync)
-- [Linux Command Reference](#linux-command-reference)
-    - [Service Status](#service-status)
-    - [List Listening Ports](#list-listening-ports)
-    - [List Users](#list-users)
-        - [Memory Usage](#memory-usage)
-        - [MAC Address](#mac-address)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [Ubuntu Server 18.04 Installation NOTES](#ubuntu-server-1804-installation-notes)auto- [Download the Required Software.](#download-the-required-software)auto- [VirtualBox Installation](#virtualbox-installation)auto- [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)auto    - [VM Configuration](#vm-configuration)auto    - [Ubuntu Installation](#ubuntu-installation)auto    - [Ubuntu Customization](#ubuntu-customization)auto        - [System Upgrade](#system-upgrade)auto        - [SSH Configuration](#ssh-configuration)auto            - [Bridged Configuration](#bridged-configuration)auto                - [IP Config with NETPLAN](#ip-config-with-netplan)auto            - [Port Forwarding Configuration](#port-forwarding-configuration)auto        - [Virtual Box Guest Additions](#virtual-box-guest-additions)auto    - [Share Folder](#share-folder)auto- [Ubuntu 18.04 Software Installation](#ubuntu-1804-software-installation)auto    - [List Installed Packaged](#list-installed-packaged)auto    - [MySQL](#mysql)auto        - [Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`](#edit-etcmysqlmysqlconfdmysqldcnf)auto        - [Create A Remote User](#create-a-remote-user)auto        - [Restart MySQL Service](#restart-mysql-service)auto    - [PostgreSQL](#postgresql)auto        - [Installation](#installation)auto        - [Configuration](#configuration)auto    - [NGINX](#nginx)auto        - [Installation](#installation-1)auto    - [Python 3](#python-3)auto    - [(Python) Virtualenv](#python-virtualenv)auto    - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)auto        - [Configuration](#configuration-1)auto    - [Supervisor](#supervisor)auto    - [NodeJS](#nodejs)auto    - [GIT](#git)auto    - [Network Clock Sync](#network-clock-sync)auto- [Linux Command Reference](#linux-command-reference)auto    - [Service Status](#service-status)auto    - [List Listening Ports](#list-listening-ports)auto    - [List Users](#list-users)auto        - [Memory Usage](#memory-usage)auto        - [MAC Address](#mac-address)autoauto<!-- /TOC -->
   
 # Download the Required Software.
 [VirutalBox](https://www.virtualbox.org/wiki/Downloads)
@@ -99,7 +57,7 @@ sudo poweroff
 #### Bridged Configuration
 
 * Configure VM Network to Bridged
-![VM Network Config](vm-install-ubuntuServer1804-mac/VM-Bridged.png)
+![VM Network Config](VM-Bridged.png)
 * Restart
   
 In Ubutnu Console type `ifconfig` , Verify the new IP Address is in your Network Segment.
