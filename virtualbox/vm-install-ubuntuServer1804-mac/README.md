@@ -138,6 +138,24 @@ sudo netplan --debug apply
 ```
 #### Port Forwarding Configuration
 
+In order to Isolate the VM and use the same IP as our local machine we can use port forwarding in:
+> Settings -> Network -> Advanced -> Attached to: NAT
+
+![Port Forwarding 1](PortForwarding1.png)
+
+> Click in Port Forwarding
+
+Enable as follows:
+* SSH in port 24 **This way we avoid Port collision with our local host**
+* MySQL in Port 3306
+* PostgreSQl in Port 5432
+* Nginx in Port 80
+* TestWeb in Port 8080
+
+![Port Forwarding 1](PortForwarding2.png)
+
+**Login in via SSH from Host Computer** \
+`ssh -p 24 ubuntu@localhost`
 
 ### Virtual Box Guest Additions
 > Menu -> Devices -> Insert Guess Additions CD Image
