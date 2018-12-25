@@ -272,6 +272,9 @@ sudo mysql -u root -p
 CREATE USER 'myroot'@'%' IDENTIFIED BY 'myroot';
 
 GRANT ALL PRIVILEGES ON *.* TO 'myroot'@'%' WITH GRANT OPTION;
+
+-- ALTER USER 'root'@'%' IDENTIFIED BY 'MyNewPass';
+
 ```
 
 [Reference for Problem Access Denied](https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost)
