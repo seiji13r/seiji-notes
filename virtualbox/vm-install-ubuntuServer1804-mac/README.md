@@ -3,42 +3,45 @@
 - [Download the Required Software.](#download-the-required-software)
 - [VirtualBox Installation](#virtualbox-installation)
 - [UBUNTU 1804 Server Installation](#ubuntu-1804-server-installation)
-    - [VM Configuration](#vm-configuration)
-    - [Ubuntu Installation](#ubuntu-installation)
-    - [Ubuntu Customization](#ubuntu-customization)
-        - [System Upgrade](#system-upgrade)
-        - [SSH Configuration](#ssh-configuration)
-            - [Bridged Configuration](#bridged-configuration)
-                - [IP Config with NETPLAN](#ip-config-with-netplan)
-            - [Port Forwarding Configuration](#port-forwarding-configuration)
-        - [Virtual Box Guest Additions](#virtual-box-guest-additions)
-    - [Share Folder](#share-folder)
+  - [VM Configuration](#vm-configuration)
+  - [Ubuntu Installation](#ubuntu-installation)
+  - [Ubuntu Customization](#ubuntu-customization)
+    - [System Upgrade](#system-upgrade)
+    - [SSH Configuration](#ssh-configuration)
+      - [Bridged Configuration](#bridged-configuration)
+        - [IP Config with NETPLAN](#ip-config-with-netplan)
+      - [Port Forwarding Configuration](#port-forwarding-configuration)
+    - [Virtual Box Guest Additions](#virtual-box-guest-additions)
+  - [Share Folder](#share-folder)
 - [Ubuntu 18.04 Software Installation](#ubuntu-1804-software-installation)
-    - [List Installed Packaged](#list-installed-packaged)
-    - [MySQL](#mysql)
-        - [Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`](#edit-etcmysqlmysqlconfdmysqldcnf)
-        - [Create A Remote User](#create-a-remote-user)
-        - [Restart MySQL Service](#restart-mysql-service)
-    - [PostgreSQL](#postgresql)
-        - [Installation](#installation)
-        - [Configuration](#configuration)
-    - [NGINX](#nginx)
-        - [Installation](#installation-1)
-    - [Python 3](#python-3)
-    - [(Python) Virtualenv](#python-virtualenv)
-    - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
-        - [Configuration](#configuration-1)
-    - [Supervisor](#supervisor)
-    - [NodeJS](#nodejs)
-    - [GIT](#git)
-    - [Network Clock Sync](#network-clock-sync)
+  - [List Installed Packaged](#list-installed-packaged)
+  - [MySQL](#mysql)
+    - [Edit `/etc/mysql/mysql.conf.d/mysqld.cnf`](#edit-etcmysqlmysqlconfdmysqldcnf)
+    - [Create A Remote User](#create-a-remote-user)
+    - [Restart MySQL Service](#restart-mysql-service)
+  - [PostgreSQL](#postgresql)
+    - [Installation](#installation)
+    - [Configuration](#configuration)
+      - [Create Super User as postgres USER](#create-super-user-as-postgres-user)
+      - [Create USER and ASSOCIATED DATABASE](#create-user-and-associated-database)
+      - [RESTORE backup or tar](#restore-backup-or-tar)
+  - [NGINX](#nginx)
+    - [Installation](#installation-1)
+  - [Python 3](#python-3)
+  - [(Python) Virtualenv](#python-virtualenv)
+  - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
+    - [Configuration](#configuration-1)
+  - [Supervisor](#supervisor)
+  - [NodeJS](#nodejs)
+  - [GIT](#git)
+  - [Network Clock Sync](#network-clock-sync)
 - [Running the VM in the backplane](#running-the-vm-in-the-backplane)
 - [Linux Command Reference](#linux-command-reference)
-    - [Service Status](#service-status)
-    - [List Listening Ports](#list-listening-ports)
-    - [List Users](#list-users)
-        - [Memory Usage](#memory-usage)
-        - [MAC Address](#mac-address)
+  - [Service Status](#service-status)
+  - [List Listening Ports](#list-listening-ports)
+  - [List Users](#list-users)
+    - [Memory Usage](#memory-usage)
+    - [MAC Address](#mac-address)
 
 # Download the Required Software.
 * [VirutalBox](https://www.virtualbox.org/wiki/Downloads)
@@ -299,6 +302,70 @@ sudo apt install postgresql postgresql-contrib
 ```
 ### Configuration
 
+```bash
+# Edit pstgresql.conf file usually found in /etc.
+sudo vim /etc/postgresql/10/main/postgresql.conf 
+# vim command -> : set number
+# change line 59 
+# listen_addresses = 'localhost' -> listen_addresses = '*'
+
+sudo vim /etc/postgresql/10/main/pg_hba.conf
+# Add At the end
+# # Allow Remote Connections
+# host    all             all             0.0.0.0/0               md5
+# host    all             all             ::/0                    md5
+
+
+sudo service postgresql restart
+```
+
+#### Create Super User as postgres USER
+
+[Reference1](https://tableplus.io/blog/2018/10/how-to-create-superuser-in-postgresql.html)
+[Reference2](https://support.chartio.com/knowledgebase/creating-a-user-with-p)
+
+```console
+sudo -u postgres psql
+```
+
+```sql
+CREATE ROLE pgremote SUPERUSER LOGIN CREATEROLE CREATEUSER REPLICATION BYPASSRLS;
+ALTER ROLE pgremote WITH PASSWORD '[password]';
+```
+
+#### Create USER and ASSOCIATED DATABASE
+
+```sql
+CREATE ROLE [USER-NAME] LOGIN PASSWORD '[password]';
+CREATE DATABASE [DB-NAME] WITH OWNER=[USER-NAME];
+
+-- Example
+CREATE ROLE test LOGIN PASSWORD '1234';
+CREATE DATABASE mytest WITH OWNER=test;
+
+```
+
+#### RESTORE backup or tar
+
+The following example is done with dvdrental.tar database example.
+
+```bash
+# Create the database in psql
+sudo -u postgres psql
+# or
+psql -h localhost -U [USER] [DATABASE]
+
+CREATE DATABASE [DATABASE];
+\q
+
+# Database
+pg_restore -h localhost -U [USER] -d [DATABASE] -v [FILE_PATH]
+# Example
+pg_restore -h localhost -U pgremote -d dvdrental -v "/home/ubuntu/dvdrental.tar"
+
+```
+
+
 ## NGINX
 ### Installation
 
@@ -425,6 +492,7 @@ date
 # Running the VM in the backplane
 ```bash
 #!/bin/bash
+# This script is to be executed in the HOst Machine in this case macOS
 # VBoxHeadless --startvm "vm_name" &
 VBoxHeadless --startvm "UbuntuServer1804" &
 ```
