@@ -6,13 +6,17 @@
   - [VM Configuration](#vm-configuration)
   - [Ubuntu Installation](#ubuntu-installation)
   - [Ubuntu Customization](#ubuntu-customization)
+    - [Install Language Package](#install-language-package)
     - [System Upgrade](#system-upgrade)
     - [SSH Configuration](#ssh-configuration)
       - [Bridged Configuration](#bridged-configuration)
         - [IP Config with NETPLAN](#ip-config-with-netplan)
       - [Port Forwarding Configuration](#port-forwarding-configuration)
+    - [Create a new SUDO User for Application Administration](#create-a-new-sudo-user-for-application-administration)
     - [Virtual Box Guest Additions](#virtual-box-guest-additions)
   - [Share Folder](#share-folder)
+- [Make the mount folder persistent (First Approach is not Working)](#make-the-mount-folder-persistent-first-approach-is-not-working)
+- [Make Directory persistent with a Symbolic link](#make-directory-persistent-with-a-symbolic-link)
 - [Ubuntu 18.04 Software Installation](#ubuntu-1804-software-installation)
   - [List Installed Packaged](#list-installed-packaged)
   - [MySQL](#mysql)
@@ -83,6 +87,13 @@ When Installing the dmg package there there is a problem at the very end of the 
 * Reboot
 
 ## Ubuntu Customization
+
+### Install Language Package
+
+```
+sudo apt-get install language-pack-en
+```
+
 ### System Upgrade
 ```bash
 # Package Libraries Update
@@ -174,6 +185,13 @@ network:
     version: 2
 ```
 
+### Create a new SUDO User for Application Administration
+
+```
+sudo adduser appsuser
+sudo adduser appsuser sudo
+```
+
 ### Virtual Box Guest Additions
 > Menu -> Devices -> Insert Guess Additions CD Image
 
@@ -225,8 +243,10 @@ cd shared
 df -H
 # Try to Cd into the Virtua Box Shared Directory
 cd /media/vm-shared
+# Add the user ubuntu to the vboxsf Group
 # sudo usermod -a -G vboxsf <user>
 sudo usermod -a -G vboxsf ubuntu
+sudo usermod -a -G vboxsf [Application user]
 # Reboot the VM and try Again
 # Try to Cd into the Virtua Box Shared Directory
 cd /media/sf_vm-shared/
@@ -234,6 +254,34 @@ cd /media/sf_vm-shared/
 # ln -s [Source] [Link]
 ln -s /media/sf_vm-shared/ myshared
 ```
+
+# Make the mount folder persistent (First Approach is not Working)
+
+This directory mount we just made is temporary and it will disappear on next reboot. To make this permanent, we'll set it so that it will mount our ~/shared directory on system startup
+
+Edit fstab file in /etc directory
+```
+sudo vim /etc/fstab
+```
+Add the following line to fstab (separated by tabs) and press Ctrl+O to Save.
+shared	/home/<username>/shared	vboxsf	defaults	0	0
+vm-shared-1804	/home/<username>/apps	vboxsf	defaults	0	0
+
+Edit modules
+```
+sudo vim /etc/modules
+```
+Add the following line to /etc/modules and save
+vboxsf
+
+# Make Directory persistent with a Symbolic link
+
+```
+ln -s [TARGET] [LINK]
+```
+
+
+(Reference)[https://gist.github.com/estorgio/1d679f962e8209f8a9232f7593683265#make-the-mount-folder-persistent]
 
 # Ubuntu 18.04 Software Installation
 ## List Installed Packaged
@@ -246,6 +294,7 @@ sudo apt list --installed
 ```bash
 sudo apt-get update
 sudo apt-get install mysql-server
+sudo apt-get install libmysqlclient-dev
 sudo mysql_secure_installation
 # Enable / Disable VALIDATE PASSWORD PLUGIN
 # SET root Password
@@ -311,9 +360,9 @@ sudo vim /etc/postgresql/10/main/postgresql.conf
 
 sudo vim /etc/postgresql/10/main/pg_hba.conf
 # Add At the end
-# # Allow Remote Connections
-# host    all             all             0.0.0.0/0               md5
-# host    all             all             ::/0                    md5
+# Allow Remote Connections
+host    all             all             0.0.0.0/0               md5
+host    all             all             ::/0                    md5
 
 
 sudo service postgresql restart
