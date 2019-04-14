@@ -31,10 +31,11 @@
       - [RESTORE backup or tar](#restore-backup-or-tar)
   - [NGINX](#nginx)
     - [Installation](#installation-1)
+    - [Configuration](#configuration-1)
   - [Python 3](#python-3)
   - [(Python) Virtualenv](#python-virtualenv)
   - [(Python) Virtualenvwrapper](#python-virtualenvwrapper)
-    - [Configuration](#configuration-1)
+    - [Configuration](#configuration-2)
   - [Supervisor](#supervisor)
   - [NodeJS](#nodejs)
   - [GIT](#git)
@@ -417,7 +418,44 @@ pg_restore -h localhost -U pgremote -d dvdrental -v "/home/ubuntu/dvdrental.tar"
 
 
 ## NGINX
+
 ### Installation
+
+```
+sudo apt-get update
+sudo apt-get install nginx
+```
+
+### Configuration
+
+```
+sudo vim /etc/nginx/sites-enabled/default
+```
+
+```bash
+# Example of Configuration
+
+# [appication_name] Project Directives Section
+        location /[appication_name]/static/ {
+                alias  /home/user/apps_directory/[appication_name]/static/;
+#           autoindex on;
+        }
+        location /[appication_name]/media/ {
+                alias  /home/user/media_directory/[appication_name]/;
+#           autoindex on;
+        }
+        location /[appication_name]/ {
+                proxy_set_header SCRIPT_NAME /[appication_name];
+                proxy_pass http://127.0.0.1:8008;
+                proxy_set_header Host $host;
+        }
+
+```
+
+
+```
+sudo service nginx reload
+```
 
 ## Python 3
 Python3 is already Installed in Ubuntu 18.04 but [pip3](https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/) is not.
