@@ -371,6 +371,7 @@ sudo service postgresql restart
 #### Create Super User as postgres USER
 
 [Reference1](https://tableplus.io/blog/2018/10/how-to-create-superuser-in-postgresql.html)
+
 [Reference2](https://support.chartio.com/knowledgebase/creating-a-user-with-p)
 
 ```console
@@ -378,7 +379,7 @@ sudo -u postgres psql
 ```
 
 ```sql
-CREATE ROLE pgremote SUPERUSER LOGIN CREATEROLE CREATEUSER REPLICATION BYPASSRLS;
+CREATE ROLE pgremote SUPERUSER LOGIN CREATEROLE CREATEDB REPLICATION BYPASSRLS;
 ALTER ROLE pgremote WITH PASSWORD '[password]';
 ```
 
