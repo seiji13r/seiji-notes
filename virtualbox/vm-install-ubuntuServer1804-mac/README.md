@@ -40,6 +40,9 @@
   - [NodeJS](#nodejs)
   - [GIT](#git)
   - [Network Clock Sync](#network-clock-sync)
+  - [Install Support Libraries for LDAP](#install-support-libraries-for-ldap)
+  - [Install RabbitMQ](#install-rabbitmq)
+  - [Install Redis](#install-redis)
 - [Running the VM in the backplane](#running-the-vm-in-the-backplane)
 - [Linux Command Reference](#linux-command-reference)
   - [Service Status](#service-status)
@@ -211,6 +214,7 @@ sudo sh ./VBoxLinuxAdditions.run
 > Guest Additions are required if you want to share a Disk between the Host machine and the Guest machine.
 
 ## Share Folder
+
 * Create a directory in the Host Machine
 * Go to Settings in the Virtual Machine Menu
 * Select the Created Directory to be shared
@@ -349,6 +353,8 @@ sudo service mysql restart
 ```console
 sudo apt update
 sudo apt install postgresql postgresql-contrib
+<!-- Install psycopg2 -->
+sudo apt-get install python-psycopg2
 ```
 ### Configuration
 
@@ -521,6 +527,10 @@ fi
 
 ## Supervisor
 
+```
+sudo apt-get install supervisor
+```
+
 ## NodeJS
 
 Check for the latest LTS Version and Update the commands shown below.
@@ -576,6 +586,24 @@ timedatectl status
 date
 
 ```
+
+## Install Support Libraries for LDAP
+
+```
+sudo apt-get install libldap2-dev
+sudo apt-get install libsasl2-dev
+```
+
+## Install RabbitMQ
+
+```
+
+```
+
+(Installation)[https://www.techulator.com/resources/18003-How-to-deploy-a-RabbitMQ-server-on-Ubuntu-1804-Bionic-Beaver.aspx]
+
+
+## Install Redis
 
 # Running the VM in the backplane
 ```bash
